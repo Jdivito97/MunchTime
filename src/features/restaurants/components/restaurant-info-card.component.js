@@ -1,10 +1,11 @@
-import React from "react";
-import { SvgXml } from "react-native-svg";
+import React from "react"
+import { SvgXml } from "react-native-svg"
 
-import { Spacer } from "../../../components/spacer/spacer.component";
-import { Text } from "../../../components/typography/text.component";
-import star from "../../../assets/star";
-import open from "../../../assets/open";
+import { Spacer } from "../../../components/spacer/spacer.component"
+import { Text } from "../../../components/typography/text.component"
+import star from "../../../assets/star"
+import open from "../../../assets/open"
+import { Favorite } from "../../../components/favorites/favorites.component"
 
 import {
   RestaurantCard,
@@ -15,7 +16,7 @@ import {
   Rating,
   Icon,
   Address,
-} from "./restaurant-info-card.styles";
+} from "./restaurant-info-card.styles"
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
@@ -29,30 +30,24 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     rating = 4,
     isClosedTemporarily = true,
     placeId,
-  } = restaurant;
+  } = restaurant
 
-  const ratingArray = Array.from(new Array(Math.floor(rating)));
+  const ratingArray = Array.from(new Array(Math.floor(rating)))
 
   return (
     <RestaurantCard elevation={5}>
+      <Favorite restaurant={restaurant} />
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Text variant="label">{name}</Text>
         <Section>
           <Rating>
             {ratingArray.map((_, i) => (
-              <SvgXml
-                key={`star-${placeId}-${i}`}
-                xml={star}
-                width={20}
-                height={20}
-              />
+              <SvgXml key={`star-${placeId}-${i}`} xml={star} width={20} height={20} />
             ))}
           </Rating>
           <SectionEnd>
-            {isClosedTemporarily && (
-              <Text variant="error">CLOSED TEMPORARILY</Text>
-            )}
+            {isClosedTemporarily && <Text variant="error">CLOSED TEMPORARILY</Text>}
             <Spacer position="left" size="large">
               {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
             </Spacer>
@@ -64,5 +59,5 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
         <Address>{address}</Address>
       </Info>
     </RestaurantCard>
-  );
-};
+  )
+}
